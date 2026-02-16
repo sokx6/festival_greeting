@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{.Holiday}}祝福</title>
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+    "
+  >
+    <!-- 邮件主容器 -->
+    <table
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      width="100%"
+      style="table-layout: fixed"
+    >
+      <tr>
+        <td align="center" style="padding: 40px 0">
+          <!-- 卡片容器 (最大宽度 600px) -->
+          <table
+            border="0"
+            cellpadding="0"
+            cellspacing="0"
+            width="600"
+            style="
+              background-color: #ffffff;
+              border-radius: 8px;
+              overflow: hidden;
+              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            "
+          >
+            <!-- 1. 顶部 Banner (节日主题色) -->
+            <tr>
+              <td
+                align="center"
+                style="background-color: #d32f2f; padding: 40px 0"
+              >
+                <h1
+                  style="
+                    color: #ffffff;
+                    margin: 0;
+                    font-size: 32px;
+                    letter-spacing: 2px;
+                  "
+                >
+                  Happy {{.Holiday}}!
+                </h1>
+                <p style="color: #ffcccc; margin: 10px 0 0 0; font-size: 16px">
+                  节日快乐 & 万事如意
+                </p>
+              </td>
+            </tr>
+
+            <!-- 2. 正文内容区域 -->
+            <tr>
+              <td style="padding: 40px 30px">
+                <h2 style="color: #333333; font-size: 20px; margin-top: 0">
+                  亲爱的 {{.Name}}：
+                </h2>
+
+                <p style="color: #555555; font-size: 16px; line-height: 1.6">
+                  展信佳！
+                </p>
+
+                <p style="color: #555555; font-size: 16px; line-height: 1.6">
+                  今天是
+                  <strong style="color: #d32f2f">{{.Date}}</strong
+                  >，在这个美好的日子里，我想向您送上最诚挚的祝福。
+                </p>
+
+                <p style="color: #555555; font-size: 16px; line-height: 1.6">
+                  愿您的{{.Holiday}}充满欢声笑语，愿您和家人身体健康，幸福安康。希望这份小小的祝福能为您的一天增添一抹亮色。
+                </p>
+
+                <!-- 装饰性分割线 -->
+                <div
+                  style="border-top: 1px solid #eeeeee; margin: 30px 0"
+                ></div>
+
+                <p
+                  style="
+                    color: #555555;
+                    font-size: 16px;
+                    line-height: 1.6;
+                    margin-bottom: 0;
+                  "
+                >
+                  顺颂商祺，
+                </p>
+                <p
+                  style="
+                    color: #333333;
+                    font-size: 16px;
+                    font-weight: bold;
+                    margin-top: 5px;
+                  "
+                >
+                  您的朋友/团队
+                </p>
+              </td>
+            </tr>
+
+            <!-- 3. 底部 Footer -->
+            <tr>
+              <td
+                align="center"
+                style="
+                  background-color: #f8f9fa;
+                  padding: 20px;
+                  color: #999999;
+                  font-size: 12px;
+                "
+              >
+                <p style="margin: 0">此邮件发送于 {{.Date}} • 祝您生活愉快</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
