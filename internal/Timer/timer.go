@@ -11,8 +11,14 @@ func StartDailyTask() {
 	for {
 		now := time.Now()
 
-		// 获取今天的 9:00:00
-		next := time.Date(now.Year(), now.Month(), now.Day(), 13, 43, 33, 0, now.Location())
+		config, err := utils.LoadConfig("config.toml")
+		if err != nil {
+			fmt.Printf("加载配置失败: %v\n", err)
+			continue
+		}
+
+		sendTime := config.SendTime
+		next := time.Date(now.Year(), now.Month(), now.Day(), sendTime.Hour, sendTime.Minute, sendTime.Second, 0, now.Location())
 
 		// 如果当前时间已经过了今天的 9 点，那么下一次执行就是明天的 9 点
 		if next.Before(now) {
@@ -26,11 +32,6 @@ func StartDailyTask() {
 		// 创建定时器并等待
 		timer := time.NewTimer(duration)
 		<-timer.C // 阻塞直到时间到达
-		config, err := utils.LoadConfig("config.toml")
-		if err != nil {
-			fmt.Printf("加载配置失败: %v\n", err)
-			continue
-		}
 		if isFestival, festivalName := utils.IsTodayFestival(); isFestival {
 			fmt.Println("今天是节日，开始发送邮件...")
 			for _, friend := range config.Friends {

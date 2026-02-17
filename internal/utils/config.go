@@ -7,8 +7,9 @@ import (
 )
 
 type Config struct {
-	Email   Email    `toml:"email"`
-	Friends []Friend `toml:"friends"`
+	Email    Email    `toml:"email"`
+	SendTime SendTime `toml:"send_time"`
+	Friends  []Friend `toml:"friends"`
 }
 
 type Email struct {
@@ -17,6 +18,12 @@ type Email struct {
 	Host     string `toml:"host"`
 	Username string `toml:"username"`
 	Password string `toml:"password"`
+}
+
+type SendTime struct {
+	Hour   int `toml:"hour"`
+	Minute int `toml:"minute"`
+	Second int `toml:"second"`
 }
 
 type Friend struct {
