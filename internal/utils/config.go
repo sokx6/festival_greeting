@@ -12,8 +12,9 @@ type Config struct {
 }
 
 type Email struct {
+	From     string `toml:"from"`
 	Port     int    `toml:"port"`
-	Addr     string `toml:"addr"`
+	Host     string `toml:"host"`
 	Username string `toml:"username"`
 	Password string `toml:"password"`
 }
