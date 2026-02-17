@@ -1,0 +1,23 @@
+[email]
+## 发件人邮箱地址
+from = "sender@example.com"
+## SMTP 端口，常见: 465(SSL) 或 587(STARTTLS)
+port = 465
+## SMTP 主机
+host = "smtp.example.com"
+## SMTP 登录用户名（一般与邮箱一致）
+username = "smtp_user"
+## SMTP 登录密码或授权码
+password = "smtp_password"
+
+[send_time]
+## 定时发送时间（24小时制）
+hour = 9
+minute = 0
+second = 0
+
+[[friends]]
+## 收件人姓名
+name = "Friend Name"
+## 收件人邮箱
+email = "friend@example.com"
