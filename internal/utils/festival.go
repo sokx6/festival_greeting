@@ -11,7 +11,8 @@ import (
 type FestivalEmailData struct {
 	FestivalName string
 	FriendName   string
-	FriendEmail  string
+	Date         string
+	Time         string
 }
 
 func IsTodayFestival() (bool, string) {
@@ -34,14 +35,17 @@ func IsTodayFestival() (bool, string) {
 
 func GetFestivalEmail(festivalName string, friendName string, friendEmail string) (string, error) {
 
-	tmpl, err := template.ParseFiles("template/festival.html")
+	tmpl, err := template.ParseFiles("./templates/festival.html")
 	if err != nil {
 		return "", err
 	}
+	date := time.Now().Format("2006-01-02")
+	time := time.Now().Format("2006-01-02 15:04:05")
 	data := FestivalEmailData{
 		FestivalName: festivalName,
 		FriendName:   friendName,
-		FriendEmail:  friendEmail,
+		Date:         date,
+		Time:         time,
 	}
 	var emailBuilder strings.Builder
 	err = tmpl.Execute(&emailBuilder, data)
