@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>{{.Holiday}}祝福</title>
+    <title>{{.FestivalName}}祝福</title>
   </head>
   <body
     style="
@@ -49,7 +49,7 @@
                     letter-spacing: 2px;
                   "
                 >
-                  Happy {{.Holiday}}!
+                  {{.FestivalName}}快乐!
                 </h1>
                 <p style="color: #ffcccc; margin: 10px 0 0 0; font-size: 16px">
                   节日快乐 & 万事如意
@@ -61,7 +61,7 @@
             <tr>
               <td style="padding: 40px 30px">
                 <h2 style="color: #333333; font-size: 20px; margin-top: 0">
-                  亲爱的 {{.Name}}：
+                  亲爱的 {{.FriendName}}：
                 </h2>
 
                 <p style="color: #555555; font-size: 16px; line-height: 1.6">
@@ -75,7 +75,7 @@
                 </p>
 
                 <p style="color: #555555; font-size: 16px; line-height: 1.6">
-                  愿您的{{.Holiday}}充满欢声笑语，愿您和家人身体健康，幸福安康。希望这份小小的祝福能为您的一天增添一抹亮色。
+                  愿您的{{.FestivalName}}充满欢声笑语，愿您和家人身体健康，幸福安康。希望这份小小的祝福能为您的一天增添一抹亮色。
                 </p>
 
                 <!-- 装饰性分割线 -->
@@ -91,7 +91,7 @@
                     margin-bottom: 0;
                   "
                 >
-                  顺颂商祺，
+                  天天开心，事事顺心，
                 </p>
                 <p
                   style="
@@ -101,7 +101,7 @@
                     margin-top: 5px;
                   "
                 >
-                  您的朋友/团队
+                  locxl
                 </p>
               </td>
             </tr>
@@ -117,7 +117,7 @@
                   font-size: 12px;
                 "
               >
-                <p style="margin: 0">此邮件发送于 {{.Date}} • 祝您生活愉快</p>
+                <p style="margin: 0">此邮件发送于 {{.Time}} • 祝您生活愉快</p>
               </td>
             </tr>
           </table>
