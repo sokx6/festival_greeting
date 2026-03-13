@@ -1,16 +1,10 @@
-package utils
+package config
 
 import (
 	"fmt"
 
 	"github.com/BurntSushi/toml"
 )
-
-type Config struct {
-	Email    Email    `toml:"email"`
-	SendTime SendTime `toml:"send_time"`
-	Friends  []Friend `toml:"friends"`
-}
 
 type Email struct {
 	From     string `toml:"from"`
@@ -29,6 +23,21 @@ type SendTime struct {
 type Friend struct {
 	Name  string `toml:"name"`
 	Email string `toml:"email"`
+}
+
+type Model struct {
+	BaseUrl   string `toml:"base_url"`
+	ModelName string `toml:"model_name"`
+	ApiKey    string `toml:"api_key"`
+}
+
+type Config struct {
+	Email      Email    `toml:"email"`
+	SendTime   SendTime `toml:"send_time"`
+	Friends    []Friend `toml:"friends"`
+	AvatarURL  string   `toml:"avatar_url"`
+	SenderName string   `toml:"sender_name"`
+	Model
 }
 
 func LoadConfig(path string) (*Config, error) {

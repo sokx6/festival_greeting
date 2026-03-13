@@ -1,6 +1,7 @@
 package Timer
 
 import (
+	"festival_greeting/internal/service/config"
 	"festival_greeting/internal/service/email"
 	"festival_greeting/internal/utils"
 	"fmt"
@@ -11,7 +12,7 @@ func StartDailyTask() {
 	for {
 		now := time.Now()
 
-		config, err := utils.LoadConfig("config.toml")
+		config, err := config.LoadConfig("config.toml")
 		if err != nil {
 			fmt.Printf("加载配置失败: %v\n", err)
 			continue
