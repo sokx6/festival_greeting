@@ -32,7 +32,7 @@ func IsTodayFestival() (bool, string) {
 			return true, lunarFestival.Front().Value.(string)
 		}
 	}
-	return true, "中秋节"
+	return false, ""
 }
 
 func GetFesTmpl(festivalName, friendName, senderName, avatarURL string) (string, error) {
