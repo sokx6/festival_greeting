@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生日祝福 - {{.FriendName}}</title>
+    <style>
+      /* 针对现代邮箱的高级 CSS 动画效果 */
+
+      /* 1. 流光文字效果 (Shimmer) */
+      @keyframes shimmer {
+        0% { background-position: -200% center; }
+        100% { background-position: 200% center; }
+      }
+      .animate-shimmer {
+        color: #D4AF37; /* Fallback 颜色 */
+        background: linear-gradient(
+          90deg,
+          #C5A059 0%,
+          #FDF0AE 40%,
+          #FFFFFF 50%,
+          #FDF0AE 60%,
+          #C5A059 100%
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 4s linear infinite;
+      }
+
+      /* 2. 星芒闪烁效果 (Twinkle) */
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.3; transform: scale(0.8); }
+        50% { opacity: 1; transform: scale(1.1); text-shadow: 0 0 8px rgba(212, 175, 55, 0.6); }
+      }
+      .animate-twinkle {
+        display: inline-block;
+        color: #D4AF37;
+        animation: twinkle 3s infinite ease-in-out;
+      }
+      .delay-1 { animation-delay: 1s; }
+      .delay-2 { animation-delay: 2s; }
+
+      /* 3. 装饰线缓慢展开效果 */
+      @keyframes expand {
+        0% { width: 0; opacity: 0; }
+        100% { width: 60px; opacity: 1; }
+      }
+      .animate-line {
+        display: inline-block;
+        height: 1px;
+        background-color: #D4AF37;
+        vertical-align: middle;
+        animation: expand 1.5s ease-out forwards;
+      }
+
+      /* 4. 徽章缓慢旋转效果 */
+      @keyframes slowSpin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      .animate-spin {
+        display: inline-block;
+        animation: slowSpin 15s linear infinite;
+      }
+    </style>
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #F4F4F5;
+      font-family: 'Georgia', 'Times New Roman', 'Microsoft YaHei', serif;
+      -webkit-font-smoothing: antialiased;
+    "
+  >
+    <!-- 邮件主容器 -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed">
+      <tr>
+        <td align="center" style="padding: 40px 10px">
+          <!-- 卡片容器 (最大宽度 600px) -->
+          <table
+            border="0"
+            cellpadding="0"
+            cellspacing="0"
+            width="600"
+            style="
+              background-color: #FFFFFF;
+              border-radius: 4px;
+              overflow: hidden;
+              box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+              max-width: 600px;
+              width: 100%;
+              border: 1px solid #E4E4E7;
+            "
+          >
+            <!-- 1. 顶部 Header (深海蓝背景 + 香槟金流光文字) -->
+            <tr>
+              <td align="center" style="background-color: #1E293B; padding: 45px 20px; text-align: center;">
+                
+                <!-- 纯文本星芒装饰 -->
+                <div style="font-size: 16px; margin-bottom: 15px; letter-spacing: 15px;">
+                  <span class="animate-twinkle">✦</span>
+                  <span class="animate-twinkle delay-1" style="font-size: 20px;">✧</span>
+                  <span class="animate-twinkle delay-2">✦</span>
+                </div>
+
+                <!-- 流光文字标题 -->
+                <h1 class="animate-shimmer" style="margin: 0; font-size: 32px; font-weight: normal; letter-spacing: 4px;">
+                  生日快乐
+                </h1>
+                
+                <p style="color: #94A3B8; margin: 15px 0 0 0; font-size: 14px; letter-spacing: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                  HAPPY BIRTHDAY
+                </p>
+              </td>
+            </tr>
+
+            <!-- 2. 正文内容区域 -->
+            <tr>
+              <td style="padding: 45px 45px 20px 45px">
+                <h2 style="color: #334155; font-size: 18px; font-weight: bold; margin-top: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                  致 {{.FriendName}}：
+                </h2>
+
+                <p style="color: #475569; font-size: 15px; line-height: 2; margin-top: 25px; text-align: justify;">
+                  展信佳。
+                </p>
+
+                <p style="color: #475569; font-size: 15px; line-height: 2; text-align: justify;">
+                  岁月清浅，时光无言。今天是 <strong style="color: #B48608; font-weight: normal;">{{.Date}}</strong>，一个专属于你的特别日子。在此，向你致以最诚挚的问候与祝福。
+                </p>
+
+                <p style="color: #475569; font-size: 15px; line-height: 2; text-align: justify;">
+                  愿你在新的一岁里，长路浩浩荡荡，万事尽可期待。愿健康与平安常伴左右，愿生活从容，内心丰盈。
+                </p>
+
+                <!-- 优雅的动态分割装饰（纯CSS+文本符号） -->
+                <div style="text-align: center; margin: 40px 0;">
+                  <span class="animate-line" style="width: 60px;"></span>
+                  <span class="animate-spin" style="color: #D4AF37; font-size: 18px; margin: 0 15px;">✧</span>
+                  <span class="animate-line" style="width: 60px;"></span>
+                </div>
+
+                <p style="color: #475569; font-size: 15px; line-height: 2; margin-bottom: 40px;">
+                  祝岁岁常欢愉，年年皆胜意。
+                </p>
+
+                <!-- 签名区域：头像 + 名字 -->
+                <table border="0" cellpadding="0" cellspacing="0" style="margin-top: 20px;">
+                  <tr>
+                    <td style="padding-right: 15px; vertical-align: middle">
+                      <img
+                        src="{{.AvatarURL}}"
+                        alt="{{.SenderName}}"
+                        width="48"
+                        height="48"
+                        style="
+                          display: block;
+                          border-radius: 50%;
+                          width: 48px;
+                          height: 48px;
+                          object-fit: cover;
+                          border: 1px solid #E2E8F0;
+                        "
+                      />
+                    </td>
+                    <td style="vertical-align: middle">
+                      <p style="color: #94A3B8; font-size: 12px; margin: 0 0 4px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                        诚挚的祝福自
+                      </p>
+                      <p style="color: #1E293B; font-size: 16px; font-weight: bold; margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                        {{.SenderName}}
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- 3. 底部 Footer -->
+            <tr>
+              <td
+                align="center"
+                style="
+                  background-color: #F8FAFC;
+                  padding: 25px;
+                  color: #CBD5E1;
+                  font-size: 12px;
+                  border-top: 1px solid #F1F5F9;
+                  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                "
+              >
+                <p style="margin: 0; letter-spacing: 1px;">此信件生成于 {{.Time}}</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

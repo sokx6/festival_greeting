@@ -20,9 +20,16 @@ type SendTime struct {
 	Second int `toml:"second"`
 }
 
+type Birthday struct {
+	Month   int  `toml:"month"`
+	Day     int  `toml:"day"`
+	IsLunar bool `toml:"is_lunar"`
+}
+
 type Friend struct {
-	Name  string `toml:"name"`
-	Email string `toml:"email"`
+	Name     string   `toml:"name"`
+	Email    string   `toml:"email"`
+	Birthday Birthday `toml:"birthday"`
 }
 
 type Model struct {
@@ -43,7 +50,7 @@ type Config struct {
 func LoadConfig(path string) (*Config, error) {
 	var config Config
 	if _, err := toml.DecodeFile(path, &config); err != nil {
-		return nil, fmt.Errorf("failed to load config: %w", err)
+		return nil, fmt.Errorf("读取配置失败: %w", err)
 	}
 	return &config, nil
 }

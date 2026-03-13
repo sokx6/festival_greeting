@@ -35,7 +35,7 @@ func IsTodayFestival() (bool, string) {
 	return true, "中秋节"
 }
 
-func GetFestivalEmail(festivalName, friendName, senderName, avatarURL string) (string, error) {
+func GetFesTmpl(festivalName, friendName, senderName, avatarURL string) (string, error) {
 	tmpl, err := template.ParseFiles("./templates/festival.html")
 	if err != nil {
 		return "", err
