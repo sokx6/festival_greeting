@@ -1,3 +1,9 @@
+## 发件人显示的姓名（会显示在收件人邮件客户端）
+sender_name = "您的祝福使者"
+
+## 发件人头像URL（可选，部分邮件客户端显示）
+avatar_url = "https://example.com/avatar.jpg"
+
 [email]
 ## 发件人邮箱地址
 from = "sender@example.com"
@@ -12,12 +18,45 @@ password = "smtp_password"
 
 [send_time]
 ## 定时发送时间（24小时制）
-hour = 9
+hour = 0
 minute = 0
 second = 0
 
+[model]
+## AI模型的基础URL
+base_url = "https://api.openai.com/v1"
+## 模型名称
+model_name = "gpt-4"
+## API密钥
+api_key = "sk-your-api-key-here"
+
 [[friends]]
 ## 收件人姓名
-name = "Friend Name"
+name = "张三"
 ## 收件人邮箱
-email = "friend@example.com"
+email = "zhangsan@example.com"
+## 收件人生日信息
+[friends.birthday]
+## 生日月份（1-12）
+month = 5
+## 生日日期（1-31）
+day = 20
+## 是否为农历生日（true: 农历, false: 公历）
+is_lunar = false
+
+[[friends]]
+name = "李四"
+email = "lisi@example.com"
+[friends.birthday]
+month = 8
+day = 15
+## 农历中秋节生日
+is_lunar = true
+
+[[friends]]
+name = "王五"
+email = "wangwu@example.com"
+[friends.birthday]
+month = 1
+day = 1
+is_lunar = false
