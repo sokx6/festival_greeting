@@ -75,7 +75,7 @@ func (c *APIClient) GetResponse(prompt string, model config.Model) (string, erro
 	request.Header.Set("Authorization", "Bearer "+model.ApiKey)
 	fmt.Printf("发送请求到模型: %s\n", model.BaseUrl)
 	fmt.Printf("请求内容: %s\n", string(jsonData))
-	fmt.Printf("请求头: %v\n", request.Header)
+	fmt.Printf("请求头: Content-Type=%s, Authorization=%s\n", request.Header.Get("Content-Type"), "Bearer ***")
 	fmt.Printf("请求体: %s\n", string(jsonData))
 	response, err := c.Client.Do(request)
 	if err != nil {

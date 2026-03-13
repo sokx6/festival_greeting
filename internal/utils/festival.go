@@ -41,7 +41,7 @@ func GetFesTmpl(festivalName, friendName, senderName, avatarURL string) (string,
 		return "", err
 	}
 	date := time.Now().Format("2006-01-02")
-	time := time.Now().Format("2006-01-02 14:45:11")
+	time := time.Now().Format("2006-01-02 15:04:05")
 	data := FestivalEmailData{
 		FestivalName: festivalName,
 		FriendName:   friendName,

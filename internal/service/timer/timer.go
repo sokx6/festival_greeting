@@ -27,7 +27,7 @@ func StartDailyTask() {
 
 		// 计算需要等待的时长
 		duration := next.Sub(now)
-		fmt.Printf("下次执行任务将在: %v (等待: %v)\n", next.Format("2006-01-02 14:45:11"), duration)
+		fmt.Printf("下次执行任务将在: %v (等待: %v)\n", next.Format("2006-01-02 15:04:05"), duration)
 
 		// 创建定时器并等待
 		timer := time.NewTimer(duration)

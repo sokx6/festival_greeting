@@ -11,11 +11,11 @@ import (
 )
 
 const (
-	festivalPrompt = "现在是%s,今天是%s,请你为我生成一个给%s的节日问候邮件正文，使用html格式，只需要html内容，不需要除了html之外的所有内容，要求尽量不使用emoji,有丰富的动态效果，贴合节日氛围，风格简约柔和，优雅、高级、沉稳，邮件文字部分要清晰可见，不能因为美观而难以辨认，各种建议等额外内容都不需要，禁止使用markdown语法，发送者是%s,发送者头像图床链接是%s"
+	festivalPrompt = "现在是%s,今天是%s,请你为我生成一个给%s的节日问候邮件正文，使用html格式，只需要html内容，不需要除了html之外的所有内容，要求尽量不使用emoji,正文部分不要有动态效果，横幅和末尾可以有动态效果，贴合节日氛围，风格简约柔和，优雅、高级、沉稳，邮件文字部分要清晰可见，不能因为美观而难以辨认，各种建议等额外内容都不需要，禁止使用markdown语法，发送者是%s,发送者头像图床链接是%s"
 
-	birthdayPrompt = "今天是公历%s，请你为我生成一个给%s的公历生日问候邮件正文，使用html格式，只需要html内容，不需要除了html之外的所有内容，要求尽量不使用emoji,有丰富的动态效果，风格简约柔和，优雅、高级、沉稳，贴合生日氛围，邮件文字部分要清晰可见，不能因为美观而难以辨认，各种建议等额外内容都不需要，禁止使用markdown语法，发送者是%s,发送者头像图床链接是%s"
+	birthdayPrompt = "今天是公历%s，请你为我生成一个给%s的公历生日问候邮件正文，使用html格式，只需要html内容，不需要除了html之外的所有内容，要求尽量不使用emoji,正文部分不要有动态效果，横幅和末尾可以有动态效果，风格简约柔和，优雅、高级、沉稳，贴合生日氛围，邮件文字部分要清晰可见，不能因为美观而难以辨认，各种建议等额外内容都不需要，禁止使用markdown语法，发送者是%s,发送者头像图床链接是%s"
 
-	lunarBirthdayPrompt = "今天是农历%02d月%02d日，阳历%s，请你为我生成一个给%s的农历生日问候邮件正文，使用html格式，只需要html内容，不需要除了html之外的所有内容，要求尽量不使用emoji,有丰富的动态效果，风格简约柔和，优雅、高级、沉稳，贴合生日氛围，邮件文字部分要清晰可见，不能因为美观而难以辨认，各种建议等额外内容都不需要，禁止使用markdown语法，发送者是%s,发送者头像图床链接是%s"
+	lunarBirthdayPrompt = "今天是农历%02d月%02d日，阳历%s，请你为我生成一个给%s的农历生日问候邮件正文，使用html格式，只需要html内容，不需要除了html之外的所有内容，要求尽量不使用emoji,正文部分不要有动态效果，横幅和末尾可以有动态效果，风格简约柔和，优雅、高级、沉稳，贴合生日氛围，邮件文字部分要清晰可见，不能因为美观而难以辨认，各种建议等额外内容都不需要，禁止使用markdown语法，发送者是%s,发送者头像图床链接是%s"
 )
 
 func cleanHTMLContent(content string) string {
@@ -27,7 +27,7 @@ func cleanHTMLContent(content string) string {
 }
 
 func GetFestivalEmail(festivalName, friendName, senderName, avatarURL string, aiModel config.Model) (string, error) {
-	prompt := fmt.Sprintf(festivalPrompt, time.Now().Format("2006-01-02 14:45:14"), festivalName, friendName, senderName, avatarURL)
+	prompt := fmt.Sprintf(festivalPrompt, time.Now().Format("2006-01-02 15:04:05"), festivalName, friendName, senderName, avatarURL)
 
 	apiClient := client.NewClient(aiModel)
 	content, err := apiClient.GetResponse(prompt, aiModel)
@@ -46,7 +46,7 @@ func GetFestivalEmail(festivalName, friendName, senderName, avatarURL string, ai
 
 func GetBirthdayEmail(friendName, senderName, avatarURL string, month int, day int, aiModel config.Model, isLunar bool) (string, error) {
 	if isLunar {
-		prompt := fmt.Sprintf(lunarBirthdayPrompt, month, day, time.Now().Format("2006-01-02 14:45:11"), friendName, senderName, avatarURL)
+		prompt := fmt.Sprintf(lunarBirthdayPrompt, month, day, time.Now().Format("2006-01-02 15:04:05"), friendName, senderName, avatarURL)
 
 		apiClient := client.NewClient(aiModel)
 
@@ -60,7 +60,7 @@ func GetBirthdayEmail(friendName, senderName, avatarURL string, month int, day i
 		return content, nil
 	}
 
-	prompt := fmt.Sprintf(birthdayPrompt, time.Now().Format("2006-01-02 14:45:11"), friendName, senderName, avatarURL)
+	prompt := fmt.Sprintf(birthdayPrompt, time.Now().Format("2006-01-02 15:04:05"), friendName, senderName, avatarURL)
 
 	apiClient := client.NewClient(aiModel)
 	content, err := apiClient.GetResponse(prompt, aiModel)
