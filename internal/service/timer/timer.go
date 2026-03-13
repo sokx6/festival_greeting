@@ -1,4 +1,4 @@
-package Timer
+package timer
 
 import (
 	"festival_greeting/internal/service/config"
@@ -11,7 +11,6 @@ import (
 func StartDailyTask() {
 	for {
 		now := time.Now()
-
 		config, err := config.LoadConfig("config.toml")
 		if err != nil {
 			fmt.Printf("加载配置失败: %v\n", err)
@@ -36,12 +35,13 @@ func StartDailyTask() {
 		if isFestival, festivalName := utils.IsTodayFestival(); isFestival {
 			fmt.Println("今天是节日，开始发送邮件...")
 			for _, friend := range config.Friends {
-				emailContent, err := utils.GetFestivalEmail(festivalName, friend.Name, friend.Email)
+				emailContent, err := email.GetEmailContent(festivalName, friend.Name, config.SenderName, config.AvatarURL, config.Model)
 				if err != nil {
-					fmt.Printf("生成邮件内容失败: %v\n", err)
+					fmt.Printf("获取邮件内容失败: %v\n", err)
 					continue
 				}
-				sender := email.NewEmailSender(config.Email.From, friend.Email, fmt.Sprintf("%s的节日祝福", festivalName), config.Email.Host, config.Email.Port, config.Email.Username, config.Email.Password, emailContent)
+
+				sender := email.NewEmailSender(config.Email.From, friend.Email, fmt.Sprintf("%s的祝福", festivalName), config.Email.Host, config.Email.Port, config.Email.Username, config.Email.Password, emailContent)
 				err = sender.Send()
 				if err != nil {
 					fmt.Printf("发送邮件失败: %v\n", err)

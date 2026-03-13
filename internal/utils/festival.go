@@ -13,6 +13,8 @@ type FestivalEmailData struct {
 	FriendName   string
 	Date         string
 	Time         string
+	SenderName   string
+	AvatarURL    string
 }
 
 func IsTodayFestival() (bool, string) {
@@ -30,11 +32,10 @@ func IsTodayFestival() (bool, string) {
 			return true, lunarFestival.Front().Value.(string)
 		}
 	}
-	return false, ""
+	return true, "中秋节"
 }
 
-func GetFestivalEmail(festivalName string, friendName string, friendEmail string) (string, error) {
-
+func GetFestivalEmail(festivalName, friendName, senderName, avatarURL string) (string, error) {
 	tmpl, err := template.ParseFiles("./templates/festival.html")
 	if err != nil {
 		return "", err

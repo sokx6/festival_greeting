@@ -37,7 +37,7 @@ type Config struct {
 	Friends    []Friend `toml:"friends"`
 	AvatarURL  string   `toml:"avatar_url"`
 	SenderName string   `toml:"sender_name"`
-	Model
+	Model      Model    `toml:"model"`
 }
 
 func LoadConfig(path string) (*Config, error) {

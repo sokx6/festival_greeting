@@ -1,9 +1,9 @@
 package main
 
 import (
-	"festival_greeting/internal/Timer"
+	"festival_greeting/internal/service/timer"
 )
 
 func main() {
-	Timer.StartDailyTask()
+	timer.StartDailyTask()
 }
