@@ -9,6 +9,14 @@ import (
 	"net/http"
 )
 
+type APIErrorResponse struct {
+	Error struct {
+		Message string `json:"message"`
+		Type    string `json:"type"`
+		Code    string `json:"code"`
+	} `json:"error"`
+}
+
 type RequestBody struct {
 	Model       string              `json:"model"`
 	Messages    []map[string]string `json:"messages"`
@@ -59,7 +67,10 @@ func (c *APIClient) GetResponse(prompt string, model config.Model) (string, erro
 		return "", fmt.Errorf("序列化为json数据失败 %w", err)
 	}
 
-	request, _ := http.NewRequest("POST", model.BaseUrl, bytes.NewBuffer(jsonData))
+	request, err := http.NewRequest("POST", model.BaseUrl, bytes.NewBuffer(jsonData))
+	if err != nil {
+		return "", fmt.Errorf("创建请求失败: %w", err)
+	}
 	request.Header.Set("Content-Type", "application/json")
 	request.Header.Set("Authorization", "Bearer "+model.ApiKey)
 	fmt.Printf("发送请求到模型: %s\n", model.BaseUrl)
@@ -73,6 +84,18 @@ func (c *APIClient) GetResponse(prompt string, model config.Model) (string, erro
 	defer response.Body.Close()
 
 	body, err := io.ReadAll(response.Body)
+	if err != nil {
+		return "", fmt.Errorf("读取响应失败 %w", err)
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		var apiErr APIErrorResponse
+		if err := json.Unmarshal(body, &apiErr); err == nil && apiErr.Error.Message != "" {
+			return "", fmt.Errorf("模型接口返回错误(%d): %s", response.StatusCode, apiErr.Error.Message)
+		}
+		return "", fmt.Errorf("模型接口返回错误(%d): %s", response.StatusCode, string(body))
+	}
+
 	var responseBody ResponseBody
 	if err := json.Unmarshal(body, &responseBody); err != nil {
 		fmt.Printf("HTTP状态码: %d\n", response.StatusCode)
@@ -81,8 +104,9 @@ func (c *APIClient) GetResponse(prompt string, model config.Model) (string, erro
 		return "", fmt.Errorf("解析响应失败: %w", err)
 	}
 
-	if err != nil {
-		return "", fmt.Errorf("读取响应失败 %w", err)
+	if len(responseBody.Choices) == 0 {
+		fmt.Printf("模型响应无choices，原始响应: %s\n", string(body))
+		return "", fmt.Errorf("模型响应格式异常: choices为空")
 	}
 	return responseBody.Choices[0].Message.Content, nil
 

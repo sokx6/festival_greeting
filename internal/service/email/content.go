@@ -27,7 +27,7 @@ func cleanHTMLContent(content string) string {
 }
 
 func GetFestivalEmail(festivalName, friendName, senderName, avatarURL string, aiModel config.Model) (string, error) {
-	prompt := fmt.Sprintf(festivalPrompt, time.Now().Format("2006-01-02 11:45:14"), festivalName, friendName, senderName, avatarURL)
+	prompt := fmt.Sprintf(festivalPrompt, time.Now().Format("2006-01-02 14:45:14"), festivalName, friendName, senderName, avatarURL)
 
 	apiClient := client.NewClient(aiModel)
 	content, err := apiClient.GetResponse(prompt, aiModel)
@@ -46,7 +46,7 @@ func GetFestivalEmail(festivalName, friendName, senderName, avatarURL string, ai
 
 func GetBirthdayEmail(friendName, senderName, avatarURL string, month int, day int, aiModel config.Model, isLunar bool) (string, error) {
 	if isLunar {
-		prompt := fmt.Sprintf(lunarBirthdayPrompt, month, day, time.Now().Format("2006-01-02 11:45:14"), friendName, senderName, avatarURL)
+		prompt := fmt.Sprintf(lunarBirthdayPrompt, month, day, time.Now().Format("2006-01-02 14:45:11"), friendName, senderName, avatarURL)
 
 		apiClient := client.NewClient(aiModel)
 
@@ -60,7 +60,7 @@ func GetBirthdayEmail(friendName, senderName, avatarURL string, month int, day i
 		return content, nil
 	}
 
-	prompt := fmt.Sprintf(birthdayPrompt, time.Now().Format("2006-01-02 11:45:14"), friendName, senderName, avatarURL)
+	prompt := fmt.Sprintf(birthdayPrompt, time.Now().Format("2006-01-02 14:45:11"), friendName, senderName, avatarURL)
 
 	apiClient := client.NewClient(aiModel)
 	content, err := apiClient.GetResponse(prompt, aiModel)
