@@ -29,6 +29,7 @@ type Birthday struct {
 type Friend struct {
 	Name     string   `toml:"name"`
 	Email    string   `toml:"email"`
+	Relation string   `toml:"relation"`
 	Birthday Birthday `toml:"birthday"`
 }
 

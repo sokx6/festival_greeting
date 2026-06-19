@@ -45,17 +45,19 @@ type ResponseBody struct {
 
 type APIClient struct {
 	Client *http.Client
+	Model  config.Model
 }
 
 func NewClient(model config.Model) *APIClient {
 	return &APIClient{
 		Client: &http.Client{},
+		Model:  model,
 	}
 }
 
-func (c *APIClient) GetResponse(prompt string, model config.Model) (string, error) {
+func (c *APIClient) GetResponse(prompt string) (string, error) {
 	requestBody := RequestBody{
-		Model: model.ModelName,
+		Model: c.Model.ModelName,
 		Messages: []map[string]string{
 			{"role": "user", "content": prompt},
 		},
@@ -67,13 +69,13 @@ func (c *APIClient) GetResponse(prompt string, model config.Model) (string, erro
 		return "", fmt.Errorf("序列化为json数据失败 %w", err)
 	}
 
-	request, err := http.NewRequest("POST", model.BaseUrl, bytes.NewBuffer(jsonData))
+	request, err := http.NewRequest("POST", c.Model.BaseUrl, bytes.NewBuffer(jsonData))
 	if err != nil {
 		return "", fmt.Errorf("创建请求失败: %w", err)
 	}
 	request.Header.Set("Content-Type", "application/json")
-	request.Header.Set("Authorization", "Bearer "+model.ApiKey)
-	fmt.Printf("发送请求到模型: %s\n", model.BaseUrl)
+	request.Header.Set("Authorization", "Bearer "+c.Model.ApiKey)
+	fmt.Printf("发送请求到模型: %s\n", c.Model.BaseUrl)
 	fmt.Printf("请求内容: %s\n", string(jsonData))
 	fmt.Printf("请求头: Content-Type=%s, Authorization=%s\n", request.Header.Get("Content-Type"), "Bearer ***")
 	fmt.Printf("请求体: %s\n", string(jsonData))
