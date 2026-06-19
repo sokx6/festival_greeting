@@ -50,10 +50,9 @@ func sendMailWithTLS(s *EmailSender, auth smtp.Auth, message string) error {
 	}
 
 	// 设置收件人
-	for _, addr := range []string{s.To} {
-		if err = client.Rcpt(addr); err != nil {
-			return fmt.Errorf("setting recipient failed: %v", err)
-		}
+	addr := s.To
+	if err = client.Rcpt(addr); err != nil {
+		return fmt.Errorf("setting recipient failed: %v", err)
 	}
 
 	// 发送邮件内容
